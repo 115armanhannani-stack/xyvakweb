@@ -1,0 +1,169 @@
+/* فونت وزیرمتن (فونت استاندارد و زیبای فارسی برای وب) */
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Vazirmatn', sans-serif;
+    user-select: none; /* جلوگیری از انتخاب متن مثل اپلیکیشن */
+    -webkit-tap-highlight-color: transparent; /* حذف چشمک زدن هنگام تاچ در موبایل */
+}
+
+body {
+    background-color: #050505;
+    color: #FFFFFF;
+    overflow: hidden; /* جلوگیری از اسکرول کل صفحه */
+}
+
+/* پس زمینه */
+.bg-animation {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% 50%, #0a0a1a 0%, #050505 100%);
+    z-index: -1;
+}
+
+/* مدیریت صفحات */
+.screen {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50px);
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+}
+
+/* هدر داشبورد */
+.dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.spacer { width: 40px; }
+
+.glow-text-cyan {
+    color: #00FFFF;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+    letter-spacing: 1px;
+}
+
+.info-btn {
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid #00FFFF;
+    color: #00FFFF;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex; justify-content: center; align-items: center;
+}
+
+/* گرید کارت‌ها */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 0 20px 40px 20px;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+/* کارت‌های نئونی */
+.neon-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 25px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.neon-card i {
+    font-size: 2.5rem;
+    color: var(--neon-color);
+    margin-bottom: 15px;
+    transition: all 0.2s ease;
+}
+
+.neon-card span {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+/* افکت کلیک/تاچ روی کارت‌ها */
+.neon-card:active {
+    transform: scale(0.95);
+    border-color: var(--neon-color);
+    box-shadow: 0 0 20px var(--neon-color);
+}
+.neon-card:active i {
+    text-shadow: 0 0 15px var(--neon-color);
+}
+
+/* هدر صفحه ابزارها */
+.tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #0a0a0a;
+}
+
+.tool-header button {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.hud-glow-line {
+    height: 2px;
+    background: #00FFFF;
+    box-shadow: 0 0 10px #00FFFF;
+    width: 100%;
+}
+
+#tool-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholder {
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    padding: 20px;
+    border: 1px dashed #333;
+    border-radius: 15px;
+}
