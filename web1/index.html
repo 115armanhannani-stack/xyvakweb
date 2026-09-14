@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <!-- تنظیمات برای نمایش درست در موبایل (جلوگیری از زوم ناخواسته) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>جعبه ابزار فرکانس</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- لینک به آیکون‌های FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- پس‌زمینه تاریک با افکت ساده -->
+    <div class="bg-animation"></div>
+
+    <!-- صفحه اصلی (داشبورد) -->
+    <div id="dashboard" class="screen active">
+        <header class="dash-header">
+            <div class="spacer"></div>
+            <h1 class="glow-text-cyan">جعبه ابزار فرکانس</h1>
+            <button class="info-btn" onclick="alert('توسعه دهنده: آرمان حنانی\nنسخه وب (PWA)')"><i class="fas fa-info"></i></button>
+        </header>
+
+        <div class="grid-container">
+            <!-- دکمه تمام عرض -->
+            <div class="neon-card full-width" data-tool="insect" data-title="دافع حشرات" style="--neon-color: #FF3366;">
+                <i class="fas fa-mosquito"></i>
+                <span>دافع حشرات</span>
+            </div>
+
+            <!-- دکمه‌های نیمه -->
+            <div class="neon-card" data-tool="speaker" data-title="پاک‌کننده اسپیکر" style="--neon-color: #00FFFF;">
+                <i class="fas fa-volume-up"></i>
+                <span>پاک‌کننده اسپیکر</span>
+            </div>
+            <div class="neon-card" data-tool="dog" data-title="سوت سگ و گربه" style="--neon-color: #FF9900;">
+                <i class="fas fa-dog"></i>
+                <span>سوت سگ و گربه</span>
+            </div>
+            <div class="neon-card" data-tool="hearing" data-title="تست شنوایی" style="--neon-color: #3366FF;">
+                <i class="fas fa-ear-listen"></i>
+                <span>تست شنوایی</span>
+            </div>
+            <div class="neon-card" data-tool="generator" data-title="ژنراتور آزاد" style="--neon-color: #FFFFFF;">
+                <i class="fas fa-wave-square"></i>
+                <span>ژنراتور آزاد</span>
+            </div>
+            <div class="neon-card" data-tool="detector" data-title="تشخیص فرکانس" style="--neon-color: #9933FF;">
+                <i class="fas fa-microphone"></i>
+                <span>تشخیص فرکانس</span>
+            </div>
+            <div class="neon-card" data-tool="training" data-title="کنسول آموزش" style="--neon-color: #00FF66;">
+                <i class="fas fa-bullseye"></i>
+                <span>کنسول آموزش</span>
+            </div>
+            <div class="neon-card" data-tool="bee" data-title="آرام‌کننده زنبور" style="--neon-color: #FFD700;">
+                <i class="fas fa-bug"></i>
+                <span>آرام‌کننده زنبور</span>
+            </div>
+            <div class="neon-card" data-tool="animal" data-title="هشدار حیوانات" style="--neon-color: #FF3366;">
+                <i class="fas fa-paw"></i>
+                <span>هشدار حیوانات</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحه ابزارها (محتوای داخلی در مرحله بعد اضافه می‌شود) -->
+    <div id="tool-view" class="screen">
+        <header class="tool-header">
+            <button id="back-btn"><i class="fas fa-arrow-right"></i></button>
+            <h2 id="tool-title" class="glow-text-cyan">عنوان ابزار</h2>
+            <button class="help-btn"><i class="fas fa-question-circle"></i></button>
+        </header>
+        
+        <!-- خط درخشان زیر هدر -->
+        <div class="hud-glow-line"></div>
+
+        <div id="tool-content">
+            <div class="placeholder">
+                <i class="fas fa-tools" style="font-size: 40px; color: #555; margin-bottom: 15px;"></i>
+                <p>رابط کاربری و موتور صوتی این ابزار در مرحله دوم اضافه خواهد شد.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
