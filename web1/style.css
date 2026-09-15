@@ -1,72 +1,282 @@
-/* استایل‌های اختصاصی ابزارها */
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Vazirmatn', sans-serif;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#app-container {
+    width: 100%;
+    max-width: 480px;
+    height: 100vh;
+    position: relative;
+    background-color: #050505;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+    margin: 0 auto;
+}
+
+#quantum-grid {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0;
+}
+.bg-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+}
+
+#splash-screen {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #050505;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+#splash-canvas { width: 100%; height: 100%; }
+
+.screen {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50px);
+    z-index: 10;
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+}
+
+.dash-header, .tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    z-index: 20;
+}
+
+.spacer { width: 40px; }
+
+.glow-text-cyan {
+    color: #00E5FF;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
+}
+
+.icon-btn {
+    background: rgba(0, 229, 255, 0.1);
+    border: 2px solid #00E5FF;
+    color: #00E5FF;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex; justify-content: center; align-items: center;
+    transition: all 0.2s;
+}
+.icon-btn:active { transform: scale(0.9); background: rgba(0, 229, 255, 0.3); }
+
+.hud-glow-line {
+    height: 2px;
+    background: #00FFFF;
+    box-shadow: 0 0 10px #00FFFF;
+    width: 100%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 10px 20px 100px 20px;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.full-width { grid-column: span 2; }
+
+/* استایل جدید و شفاف دکمه‌ها (Glassmorphism) */
+.neon-card {
+    position: relative;
+    height: 120px;
+    border-radius: 20px;
+    background: rgba(10, 10, 15, 0.2);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.neon-card.full-width { height: 100px; }
+
+/* نوار چرخان با طول بیشتر و سرعت کمتر */
+.neon-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(
+        var(--color1) 0%, 
+        var(--color2) 70%, 
+        transparent 90%, 
+        var(--color1) 100%
+    );
+    animation: rotateBorder 12s linear infinite;
+}
+
+.neon-card-content {
+    position: absolute;
+    inset: 2px;
+    background: rgba(15, 15, 20, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.neon-card:active { transform: scale(0.95); }
+.neon-card:active .neon-card-content { background: rgba(255, 255, 255, 0.1); }
+
+.neon-card-content i { font-size: 2.2rem; margin-bottom: 10px; }
+.neon-card-content span { font-size: 0.85rem; font-weight: bold; color: #FFFFFF; }
+
+@keyframes rotateBorder {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#tool-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+    position: relative;
+}
+
 .tool-ui {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     animation: fadeIn 0.3s ease;
+    height: 100%;
 }
 
-.tool-ui.hidden {
-    display: none;
-}
+.tool-ui.hidden { display: none; }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* نمایشگر فرکانس */
+.tool-canvas {
+    width: 100%;
+    height: 220px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
 .freq-display {
     font-size: 3.5rem;
     font-weight: 300;
     color: #FFF;
-    margin: 30px 0;
-    text-shadow: 0 0 20px var(--active-color);
-    transition: text-shadow 0.3s;
+    margin: 10px 0 20px 0;
+    text-shadow: 0 0 25px var(--active-color);
+    transition: text-shadow 0.3s, color 0.3s;
 }
 
 .status-text {
     font-size: 1rem;
     color: #888;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-align: center;
+    transition: color 0.3s;
 }
 
-/* اسلایدر نئونی */
+.tune-layout {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.tune-btn {
+    background: #1A1A1A;
+    border: none;
+    color: #FFF;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex: 1;
+}
+.tune-btn:active { background: #333; }
+
 .neon-slider {
     -webkit-appearance: none;
-    width: 90%;
+    width: 95%;
     height: 6px;
     background: #1A1A1A;
     border-radius: 5px;
     outline: none;
-    margin: 20px 0 40px 0;
+    margin: 10px 0 30px 0;
 }
 
 .neon-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    background: #FFF;
-    box-shadow: 0 0 15px #FFF;
+    background: var(--active-color, #FFF);
+    box-shadow: 0 0 15px var(--active-color, #FFF);
     cursor: pointer;
 }
 
-/* دکمه‌های انتخاب موج و پریست‌ها */
 .wave-grid, .preset-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .wave-btn, .preset-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(20, 20, 25, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.1);
     color: #AAA;
     padding: 15px;
     border-radius: 15px;
@@ -74,14 +284,14 @@
     font-weight: bold;
     cursor: pointer;
     transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.preset-btn span {
-    font-size: 0.8rem;
-    font-weight: normal;
-    display: block;
-    margin-top: 5px;
-}
+.preset-btn span { font-size: 0.8rem; font-weight: normal; margin-top: 5px; }
 
 .wave-btn.active, .preset-btn.active {
     background: rgba(255, 255, 255, 0.1);
@@ -90,7 +300,6 @@
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
 }
 
-/* دکمه بزرگ پخش/توقف */
 .play-btn {
     width: 90%;
     padding: 18px;
@@ -102,12 +311,42 @@
     background: var(--active-color);
     color: #050505;
     border: none;
-    margin-top: auto;
+    margin-top: 20px;
 }
 
 .play-btn.playing {
-    background: transparent;
+    background: rgba(0,0,0,0.5);
     border: 2px solid var(--active-color);
     color: var(--active-color);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1) inset;
 }
+
+.pad-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.neon-pad {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--pad-color);
+    border-radius: 20px;
+    padding: 30px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.1s;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+.neon-pad:active, .neon-pad.active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.92);
+    box-shadow: 0 0 25px var(--pad-color);
+}
+
+.neon-pad span { color: #FFF; font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; }
+.neon-pad small { color: #AAA; font-size: 0.8rem; }
