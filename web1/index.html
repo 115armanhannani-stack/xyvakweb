@@ -8,110 +8,177 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="bg-animation"></div>
+    <div id="app-container">
+        
+        <canvas id="quantum-grid"></canvas>
+        <div class="bg-overlay"></div>
 
-    <!-- داشبورد -->
-    <div id="dashboard" class="screen active">
-        <header class="dash-header">
-            <div class="spacer"></div>
-            <h1 class="glow-text-cyan">جعبه ابزار فرکانس</h1>
-            <button class="info-btn" onclick="alert('توسعه دهنده: آرمان حنانی\nنسخه وب (PWA)')"><i class="fas fa-info"></i></button>
-        </header>
+        <!-- داشبورد اصلی -->
+        <div id="dashboard" class="screen">
+            <header class="dash-header">
+                <div class="spacer"></div>
+                <h1 class="glow-text-cyan">جعبه ابزار فرکانس</h1>
+                <button id="info-btn" class="icon-btn" onclick="alert('توسعه دهنده: آرمان حنانی\nنسخه وب (PWA)')"><i class="fas fa-info"></i></button>
+            </header>
 
-        <div class="grid-container">
-            <div class="neon-card full-width" data-tool="insect" data-title="دافع حشرات" style="--neon-color: #FF3366;">
-                <i class="fas fa-mosquito"></i><span>دافع حشرات</span>
-            </div>
-            <div class="neon-card" data-tool="speaker" data-title="پاک‌کننده اسپیکر" style="--neon-color: #00FFFF;">
-                <i class="fas fa-volume-up"></i><span>پاک‌کننده اسپیکر</span>
-            </div>
-            <div class="neon-card" data-tool="dog" data-title="سوت سگ و گربه" style="--neon-color: #FF9900;">
-                <i class="fas fa-dog"></i><span>سوت سگ و گربه</span>
-            </div>
-            <div class="neon-card" data-tool="generator" data-title="ژنراتور آزاد" style="--neon-color: #FFFFFF;">
-                <i class="fas fa-wave-square"></i><span>ژنراتور آزاد</span>
-            </div>
-            <!-- ابزارهای مرحله بعد -->
-            <div class="neon-card" data-tool="hearing" data-title="تست شنوایی" style="--neon-color: #3366FF;">
-                <i class="fas fa-ear-listen"></i><span>تست شنوایی</span>
-            </div>
-            <div class="neon-card" data-tool="detector" data-title="تشخیص فرکانس" style="--neon-color: #9933FF;">
-                <i class="fas fa-microphone"></i><span>تشخیص فرکانس</span>
+            <div class="grid-container">
+                <div class="neon-card full-width" data-tool="generator" style="--color1: #E0E0E0; --color2: #888888;">
+                    <div class="neon-card-content"><i class="fas fa-wave-square" style="color: #E0E0E0;"></i><span>ژنراتور فرکانس</span></div>
+                </div>
+                <div class="neon-card" data-tool="speaker" style="--color1: #00E5FF; --color2: #0055FF;">
+                    <div class="neon-card-content"><i class="fas fa-volume-up" style="color: #00E5FF;"></i><span>پاک‌کننده اسپیکر</span></div>
+                </div>
+                <div class="neon-card" data-tool="insect" style="--color1: #FF0066; --color2: #FF6600;">
+                    <div class="neon-card-content"><i class="fas fa-bug" style="color: #FF0066;"></i><span>دافع حشرات</span></div>
+                </div>
+                <div class="neon-card" data-tool="hearing" style="--color1: #3366FF; --color2: #9933FF;">
+                    <div class="neon-card-content"><i class="fas fa-ear-listen" style="color: #3366FF;"></i><span>تست شنوایی</span></div>
+                </div>
+                <div class="neon-card" data-tool="dog" style="--color1: #FF9900; --color2: #FF0066;">
+                    <div class="neon-card-content"><i class="fas fa-dog" style="color: #FF9900;"></i><span>سوت سگ و گربه</span></div>
+                </div>
+                <div class="neon-card" data-tool="detector" style="--color1: #9933FF; --color2: #FF00FF;">
+                    <div class="neon-card-content"><i class="fas fa-microphone" style="color: #9933FF;"></i><span>تشخیص فرکانس</span></div>
+                </div>
+                <div class="neon-card" data-tool="training" style="--color1: #00FFCC; --color2: #00FF66;">
+                    <div class="neon-card-content"><i class="fas fa-bullseye" style="color: #00FFCC;"></i><span>کنسول آموزش</span></div>
+                </div>
+                <div class="neon-card" data-tool="bee" style="--color1: #FFD700; --color2: #FF9900;">
+                    <div class="neon-card-content"><i class="fas fa-forumbee" style="color: #FFD700;"></i><span>آرام‌کننده زنبور</span></div>
+                </div>
+                <div class="neon-card" data-tool="animal" style="--color1: #FF3366; --color2: #9900FF;">
+                    <div class="neon-card-content"><i class="fas fa-paw" style="color: #FF3366;"></i><span>هشدار حیوانات</span></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- صفحه ابزارها -->
-    <div id="tool-view" class="screen">
-        <header class="tool-header">
-            <button id="back-btn"><i class="fas fa-arrow-right"></i></button>
-            <h2 id="tool-title" class="glow-text-cyan">عنوان ابزار</h2>
-            <button class="help-btn"><i class="fas fa-question-circle"></i></button>
-        </header>
-        <div class="hud-glow-line"></div>
-
-        <div id="tool-content">
+        <!-- صفحه ابزارها -->
+        <div id="tool-view" class="screen">
+            <header class="tool-header">
+                <button id="back-btn" class="icon-btn"><i class="fas fa-arrow-right"></i></button>
+                <h2 id="tool-title" class="glow-text-cyan">عنوان ابزار</h2>
+                <button class="icon-btn"><i class="fas fa-question-circle"></i></button>
+            </header>
+            <div class="hud-glow-line"></div>
             
-            <!-- 1. ژنراتور آزاد -->
-            <div id="ui-generator" class="tool-ui hidden">
-                <div class="freq-display" id="gen-freq-display" style="--active-color: #FFFFFF;">440 Hz</div>
-                <input type="range" id="gen-slider" class="neon-slider" min="0" max="1000" value="500">
-                <div class="wave-grid">
-                    <button class="wave-btn active" data-wave="sine">Sine</button>
-                    <button class="wave-btn" data-wave="square">Square</button>
-                    <button class="wave-btn" data-wave="sawtooth">Saw</button>
-                    <button class="wave-btn" data-wave="triangle">Triangle</button>
+            <div id="tool-content">
+                
+                <!-- 1. ژنراتور فرکانس -->
+                <div id="ui-generator" class="tool-ui hidden">
+                    <canvas id="canvas-oscilloscope" class="tool-canvas"></canvas>
+                    <div class="freq-display" id="gen-freq-display" dir="ltr" style="--active-color: #00FFFF;">440 Hz</div>
+                    <div class="tune-layout">
+                        <button class="tune-btn" data-val="-10">-10</button>
+                        <button class="tune-btn" data-val="-1">-1</button>
+                        <button class="tune-btn" data-val="1">+1</button>
+                        <button class="tune-btn" data-val="10">+10</button>
+                    </div>
+                    <input type="range" id="gen-slider" class="neon-slider" min="0" max="1000" value="500">
+                    <div class="wave-grid">
+                        <button class="wave-btn active" data-wave="sine">Sine</button>
+                        <button class="wave-btn" data-wave="square">Square</button>
+                        <button class="wave-btn" data-wave="sawtooth">Saw</button>
+                        <button class="wave-btn" data-wave="triangle">Triangle</button>
+                    </div>
+                    <button class="play-btn" id="gen-play-btn" style="--active-color: #00FFFF;">پخش فرکانس</button>
                 </div>
-                <button class="play-btn" id="gen-play-btn" style="--active-color: #FFFFFF;">پخش فرکانس</button>
-            </div>
 
-            <!-- 2. دافع حشرات -->
-            <div id="ui-insect" class="tool-ui hidden">
-                <div class="status-text" id="insect-status">آماده پخش</div>
-                <div class="preset-grid">
-                    <button class="preset-btn" data-freq="17000">پشه<br><span>17 kHz</span></button>
-                    <button class="preset-btn" data-freq="15000">مگس<br><span>15 kHz</span></button>
-                    <button class="preset-btn" data-freq="14000">کک و کنه<br><span>14 kHz</span></button>
-                    <button class="preset-btn" data-freq="20000">موش<br><span>20 kHz</span></button>
-                    <button class="preset-btn full-width" data-sweep="true">موج متغیر (پیشنهادی)<br><span>15 - 20 kHz</span></button>
+                <!-- 2. دافع حشرات -->
+                <div id="ui-insect" class="tool-ui hidden">
+                    <canvas id="canvas-radar" class="tool-canvas"></canvas>
+                    <div class="status-text" id="insect-status">رادار آماده پخش</div>
+                    <div class="preset-grid">
+                        <button class="preset-btn" data-freq="17000">پشه<br><span dir="ltr">17 kHz</span></button>
+                        <button class="preset-btn" data-freq="15000">مگس<br><span dir="ltr">15 kHz</span></button>
+                        <button class="preset-btn" data-freq="14000">کک و کنه<br><span dir="ltr">14 kHz</span></button>
+                        <button class="preset-btn" data-freq="20000">موش<br><span dir="ltr">20 kHz</span></button>
+                        <button class="preset-btn full-width" data-sweep="true">موج متغیر (پیشنهادی)<br><span dir="ltr">15 - 20 kHz</span></button>
+                    </div>
                 </div>
-                <button class="play-btn" id="insect-play-btn" style="--active-color: #FF3366;">پخش</button>
-            </div>
 
-            <!-- 3. سوت سگ -->
-            <div id="ui-dog" class="tool-ui hidden">
-                <div class="status-text" id="dog-status">آماده پخش</div>
-                <div class="preset-grid">
-                    <button class="preset-btn" data-freq="22000">سگ (جلب توجه)<br><span>22 kHz</span></button>
-                    <button class="preset-btn" data-freq="25000">سگ (توقف پارس)<br><span>25 kHz</span></button>
-                    <button class="preset-btn" data-freq="24000">گربه (فراخوان)<br><span>24 kHz</span></button>
-                    <button class="preset-btn" data-freq="20000">گربه (بازدارنده)<br><span>20 kHz</span></button>
+                <!-- 3. سوت سگ و گربه -->
+                <div id="ui-dog" class="tool-ui hidden">
+                    <canvas id="canvas-emitter" class="tool-canvas"></canvas>
+                    <div class="status-text" id="dog-status">رادار آماده پخش</div>
+                    <div class="preset-grid">
+                        <button class="preset-btn" data-freq="22000">سگ (جلب توجه)<br><span dir="ltr">22 kHz</span></button>
+                        <button class="preset-btn" data-freq="25000">سگ (توقف پارس)<br><span dir="ltr">25 kHz</span></button>
+                        <button class="preset-btn" data-freq="24000">گربه (فراخوان)<br><span dir="ltr">24 kHz</span></button>
+                        <button class="preset-btn" data-freq="20000">گربه (بازدارنده)<br><span dir="ltr">20 kHz</span></button>
+                    </div>
                 </div>
-                <button class="play-btn" id="dog-play-btn" style="--active-color: #FF9900;">پخش</button>
-            </div>
 
-            <!-- 4. پاک‌کننده اسپیکر -->
-            <div id="ui-speaker" class="tool-ui hidden">
-                <div class="status-text" id="speaker-status" style="color: #00FFFF;">ولوم را روی حداکثر قرار دهید</div>
-                <div class="preset-grid">
-                    <button class="preset-btn full-width" data-mode="deep">لرزش عمیق<br><span>165 Hz</span></button>
-                    <button class="preset-btn full-width" data-mode="sweep">موج متغیر<br><span>100 - 250 Hz</span></button>
-                    <button class="preset-btn full-width" data-mode="shock">شوک ضربه‌ای<br><span>پالس 165 Hz</span></button>
+                <!-- 4. پاک‌کننده اسپیکر -->
+                <div id="ui-speaker" class="tool-ui hidden">
+                    <canvas id="canvas-speaker" class="tool-canvas" style="height: 280px;"></canvas>
+                    <div class="freq-display" id="speaker-phase-text" style="font-size: 1.5rem; margin-bottom: 5px; --active-color: #00E5FF;">آماده برای پاک‌سازی</div>
+                    <div class="status-text" id="speaker-status">ولوم را روی حداکثر قرار دهید و گوشی را برگردانید</div>
+                    <button class="play-btn" id="speaker-play-btn" style="--active-color: #00E5FF; margin-top: 30px;">شروع پاک‌سازی خودکار</button>
                 </div>
-                <button class="play-btn" id="speaker-play-btn" style="--active-color: #00FFFF;">شروع پاک‌سازی</button>
-            </div>
 
-            <!-- پیام برای ابزارهای در حال ساخت -->
-            <div id="ui-placeholder" class="tool-ui hidden">
-                <div class="placeholder">
-                    <i class="fas fa-tools" style="font-size: 40px; color: #555; margin-bottom: 15px;"></i>
-                    <p>این ابزار در مرحله بعدی اضافه خواهد شد.</p>
+                <!-- 5. تست شنوایی -->
+                <div id="ui-hearing" class="tool-ui hidden">
+                    <canvas id="canvas-hearing" class="tool-canvas" style="height: 280px;"></canvas>
+                    <div class="freq-display" id="hearing-freq-display" dir="ltr" style="--active-color: #3366FF;">8000 Hz</div>
+                    <div class="status-text" id="hearing-age" style="color: #00FFFF; font-size: 1.2rem; font-weight: bold; margin-bottom: 30px;">سن شنوایی: محاسبه...</div>
+                    <input type="range" id="hearing-slider" class="neon-slider" min="0" max="1000" value="0" style="--active-color: #3366FF;">
+                    <button class="play-btn" id="hearing-play-btn" style="--active-color: #3366FF;">شروع تست</button>
                 </div>
-            </div>
 
+                <!-- 6. تشخیص فرکانس -->
+                <div id="ui-detector" class="tool-ui hidden">
+                    <canvas id="canvas-detector" class="tool-canvas" style="height: 280px; position: absolute; top: 100px; left: 0; z-index: -1;"></canvas>
+                    <div class="freq-display" id="detector-freq-display" dir="ltr" style="--active-color: transparent; font-size: 4.5rem; margin-top: 80px;">0.0 Hz</div>
+                    <div id="detector-note" dir="ltr" style="color: #FFF; font-size: 2.5rem; font-weight: bold; margin-bottom: 20px; text-shadow: 0 0 15px rgba(255,255,255,0.5);">--</div>
+                    <div class="status-text" id="detector-status" style="margin-bottom: 50px;">در انتظار دسترسی میکروفون...</div>
+                    <button class="play-btn" id="detector-start-btn" style="--active-color: #9933FF; margin-top: auto;">شروع تشخیص</button>
+                </div>
+
+                <!-- 7. کنسول آموزش -->
+                <div id="ui-training" class="tool-ui hidden">
+                    <div class="status-text">پدهای آموزشی (Launchpad)</div>
+                    <div class="pad-grid">
+                        <div class="neon-pad" data-sound="click" style="--pad-color: #00FF66;"><span>تایید</span><small>کلیکر سریع</small></div>
+                        <div class="neon-pad" data-sound="attention" style="--pad-color: #00FFFF;"><span>جلب توجه</span><small>نگاه کن</small></div>
+                        <div class="neon-pad" data-sound="no" style="--pad-color: #FF3366;"><span>بازدارنده</span><small>توقف کار</small></div>
+                        <div class="neon-pad" data-sound="come" style="--pad-color: #9933FF;"><span>فراخوان</span><small>نگه دارید</small></div>
+                        <div class="neon-pad" data-sound="sit" style="--pad-color: #FFD700;"><span>بنشین</span><small>دو بوق کوتاه</small></div>
+                        <div class="neon-pad" data-sound="stay" style="--pad-color: #FF9900;"><span>بمان</span><small>بوق ممتد</small></div>
+                    </div>
+                </div>
+
+                <!-- 8. آرام‌کننده زنبور -->
+                <div id="ui-bee" class="tool-ui hidden">
+                    <canvas id="canvas-bee" class="tool-canvas"></canvas>
+                    <div class="status-text" id="bee-status">کندو در حالت استراحت</div>
+                    <div class="preset-grid">
+                        <button class="preset-btn" data-freq="250">آرامش کارگر<br><span dir="ltr">250 Hz</span></button>
+                        <button class="preset-btn" data-freq="400">فرکانس ملکه<br><span dir="ltr">400 Hz</span></button>
+                        <button class="preset-btn" data-freq="300">ارتعاش کندو<br><span dir="ltr">300 Hz</span></button>
+                        <button class="preset-btn" data-freq="500">فرکانس هشدار<br><span dir="ltr">500 Hz</span></button>
+                    </div>
+                </div>
+
+                <!-- 9. هشدار حیوانات -->
+                <div id="ui-animal" class="tool-ui hidden">
+                    <canvas id="canvas-animal" class="tool-canvas"></canvas>
+                    <div class="status-text" id="animal-status">سیستم هشدار آماده است</div>
+                    <div class="preset-grid" style="grid-template-columns: 1fr;">
+                        <button class="preset-btn" data-mode="1">آژیر متغیر<br><span dir="ltr">دندانه‌اره‌ای (2kHz - 4kHz)</span></button>
+                        <button class="preset-btn" data-mode="2">پالس هشدار<br><span dir="ltr">مربعی ضربه‌ای (3kHz)</span></button>
+                        <button class="preset-btn" data-mode="3">فراصوت خشن<br><span dir="ltr">مربعی پیوسته (18kHz)</span></button>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
 
+        <!-- اسپلاش اسکرین -->
+        <div id="splash-screen">
+            <canvas id="splash-canvas"></canvas>
+        </div>
+
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
